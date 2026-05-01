@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reclaim'r — Campus Lost & Found</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,800;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-brand">
+      <span class="brand-icon"><i class="fas fa-magnifying-glass"></i></span>
+      <span class="brand-name">Reclaim<span class="brand-accent">'r</span></span>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home" class="nav-link active">Home</a></li>
+      <li><a href="#browse" class="nav-link">Browse Items</a></li>
+      <li><a href="#report" class="nav-link">Report Item</a></li>
+      <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn-outline" id="loginBtn">Login</button>
+      <button class="btn-primary" id="signupBtn">Sign Up</button>
+      <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="close-mobile" id="closeMobile"><i class="fas fa-times"></i></button>
+    <ul>
+      <li><a href="#home" class="mobile-link">Home</a></li>
+      <li><a href="#browse" class="mobile-link">Browse Items</a></li>
+      <li><a href="#report" class="mobile-link">Report Item</a></li>
+      <li><a href="#how-it-works" class="mobile-link">How It Works</a></li>
+    </ul>
+    <div class="mobile-actions">
+      <button class="btn-outline">Login</button>
+      <button class="btn-primary">Sign Up</button>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+      <div class="dot-grid"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span> Campus Lost & Found System
+      </div>
+      <h1 class="hero-title">Lost something on <em>campus?</em> We'll help you <em>reclaim</em> it.</h1>
+      <p class="hero-sub">Reclaim'r connects students who've lost items with those who've found them — fast, simple, and campus-wide.</p>
+      <div class="hero-cta">
+        <button class="btn-primary btn-large" onclick="scrollToSection('report')">
+          <i class="fas fa-plus"></i> Report an Item
+        </button>
+        <button class="btn-ghost btn-large" onclick="scrollToSection('browse')">
+          <i class="fas fa-search"></i> Browse Found Items
+        </button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num" data-target="248">0</span>
+          <span class="stat-label">Items Recovered</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num" data-target="91">0</span><span class="stat-pct">%</span>
+          <span class="stat-label">Success Rate</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num" data-target="1200">0</span>
+          <span class="stat-label">Active Users</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK SEARCH BAR -->
+  <section class="search-bar-section">
+    <div class="search-container">
+      <div class="search-wrap">
+        <i class="fas fa-magnifying-glass search-icon-inp"></i>
+        <input type="text" id="globalSearch" class="search-input-main" placeholder="Search for lost or found items…" />
+        <select id="searchCategory" class="search-select">
+          <option value="">All Categories</option>
+          <option value="electronics">Electronics</option>
+          <option value="documents">Documents</option>
+          <option value="clothing">Clothing</option>
+          <option value="keys">Keys</option>
+          <option value="bags">Bags</option>
+          <option value="other">Other</option>
+        </select>
+        <button class="btn-primary search-btn" onclick="performSearch()">Search</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- BROWSE ITEMS -->
+  <section class="browse-section" id="browse">
+    <div class="section-header">
+      <span class="section-label">Browse</span>
+      <h2 class="section-title">Recent Items</h2>
+      <p class="section-sub">Browse through recently lost and found items across campus.</p>
+    </div>
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="lost">Lost Items</button>
+      <button class="filter-btn" data-filter="found">Found Items</button>
+      <button class="filter-btn" data-filter="claimed">Claimed</button>
+    </div>
+    <div class="items-grid" id="itemsGrid"></div>
+    <div class="load-more-wrap">
+      <button class="btn-outline btn-large" id="loadMoreBtn">Load More Items</button>
+    </div>
+  </section>
+
+  <!-- REPORT ITEM -->
+  <section class="report-section" id="report">
+    <div class="report-inner">
+      <div class="report-info">
+        <span class="section-label">Report</span>
+        <h2 class="section-title">Lost or Found Something?</h2>
+        <p class="section-sub">Fill out this form and we'll notify matched students instantly.</p>
+        <ul class="report-benefits">
+          <li><i class="fas fa-bolt"></i> Instant campus-wide notification</li>
+          <li><i class="fas fa-shield-halved"></i> Secure contact exchange</li>
+          <li><i class="fas fa-bell"></i> Real-time match alerts</li>
+          <li><i class="fas fa-clock"></i> 24/7 available</li>
+        </ul>
+      </div>
+      <div class="report-form-card">
+        <div class="form-tabs">
+          <button class="form-tab active" data-tab="lost" onclick="switchTab('lost')">
+            <i class="fas fa-circle-exclamation"></i> I Lost Something
+          </button>
+          <button class="form-tab" data-tab="found" onclick="switchTab('found')">
+            <i class="fas fa-circle-check"></i> I Found Something
+          </button>
+        </div>
+        <form id="reportForm" class="report-form" onsubmit="submitReport(event)">
+          <div class="form-group">
+            <label class="form-label">Item Name *</label>
+            <input type="text" class="form-input" id="itemName" placeholder="e.g. Black Laptop Bag" required />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Category *</label>
+              <select class="form-input" id="itemCategory" required>
+                <option value="">Select category</option>
+                <option>Electronics</option>
+                <option>Documents</option>
+                <option>Clothing</option>
+                <option>Keys</option>
+                <option>Bags</option>
+                <option>Jewelry</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Date *</label>
+              <input type="date" class="form-input" id="itemDate" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Location *</label>
+            <input type="text" class="form-input" id="itemLocation" placeholder="e.g. Library, Ground Floor" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Description</label>
+            <textarea class="form-input form-textarea" id="itemDesc" placeholder="Describe the item in detail…"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Your Contact Email *</label>
+            <input type="email" class="form-input" id="itemEmail" placeholder="you@university.edu" required />
+          </div>
+          <div class="form-group upload-area" id="uploadArea">
+            <i class="fas fa-image upload-icon"></i>
+            <span>Drag & drop a photo or <label for="fileInput" class="upload-link">browse</label></span>
+            <input type="file" id="fileInput" accept="image/*" hidden onchange="handleFile(event)" />
+            <span class="upload-hint">PNG, JPG up to 5MB</span>
+            <div id="filePreview" class="file-preview hidden"></div>
+          </div>
+          <button type="submit" class="btn-primary btn-full btn-large">
+            <i class="fas fa-paper-plane"></i> Submit Report
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-section" id="how-it-works">
+    <div class="section-header">
+      <span class="section-label">Process</span>
+      <h2 class="section-title">How Reclaim'r Works</h2>
+      <p class="section-sub">Three simple steps to reunite you with your belongings.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <div class="step-icon"><i class="fas fa-file-pen"></i></div>
+        <h3>Report the Item</h3>
+        <p>Submit a detailed report of what you lost or found — location, category, description and a photo.</p>
+      </div>
+      <div class="step-connector"><i class="fas fa-arrow-right"></i></div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <div class="step-icon"><i class="fas fa-robot"></i></div>
+        <h3>Smart Matching</h3>
+        <p>Our system scans existing reports and notifies relevant students automatically.</p>
+      </div>
+      <div class="step-connector"><i class="fas fa-arrow-right"></i></div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <div class="step-icon"><i class="fas fa-handshake"></i></div>
+        <h3>Reclaim & Connect</h3>
+        <p>Connect securely, verify ownership, and reclaim your item on campus.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials-section">
+    <div class="section-header">
+      <span class="section-label">Stories</span>
+      <h2 class="section-title">Reunited on Campus</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">"Lost my ID card the day before exams. Within 2 hours someone found it and I got a match alert. Absolutely saved me!"</p>
+        <div class="t-author">
+          <div class="t-avatar" style="background:#e8b4b8">A</div>
+          <div><span class="t-name">Ananya S.</span><span class="t-dept">Computer Science, 3rd Year</span></div>
+        </div>
+      </div>
+      <div class="testimonial-card featured">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">"Found someone's Airpods at the library and posted them. The owner contacted me same day. So smooth!"</p>
+        <div class="t-author">
+          <div class="t-avatar" style="background:#b4d4e8">R</div>
+          <div><span class="t-name">Rohan M.</span><span class="t-dept">Mechanical Engg, 2nd Year</span></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">"My thesis notebook was gone and I panicked. Reclaim'r found it within a day. Can't imagine losing 6 months of work."</p>
+        <div class="t-author">
+          <div class="t-avatar" style="background:#b4e8c8">P</div>
+          <div><span class="t-name">Priya K.</span><span class="t-dept">Literature, Final Year</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="nav-brand">
+          <span class="brand-icon"><i class="fas fa-magnifying-glass"></i></span>
+          <span class="brand-name">Reclaim<span class="brand-accent">'r</span></span>
+        </div>
+        <p>Campus Lost & Found, reimagined. Built for students, by students.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+      <div class="footer-links-group">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="#">Browse Items</a></li>
+          <li><a href="#">Report Lost</a></li>
+          <li><a href="#">Report Found</a></li>
+          <li><a href="#">My Reports</a></li>
+        </ul>
+      </div>
+      <div class="footer-links-group">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Contact Admin</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+      <div class="footer-links-group">
+        <h4>Campus</h4>
+        <ul>
+          <li><a href="#">Campus Map</a></li>
+          <li><a href="#">Admin Portal</a></li>
+          <li><a href="#">Statistics</a></li>
+          <li><a href="#">Announcements</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Reclaim'r. All rights reserved.</span>
+      <span>Made with <i class="fas fa-heart" style="color:#e07070"></i> for campus students</span>
+    </div>
+  </footer>
+
+  <!-- ITEM DETAIL MODAL -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+    <div class="modal-card" id="modalCard" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- SUCCESS TOAST -->
+  <div class="toast" id="toast">
+    <i class="fas fa-circle-check toast-icon"></i>
+    <span id="toastMsg">Report submitted successfully!</span>
+  </div>
+
+  <!-- AUTH MODAL -->
+  <div class="modal-overlay" id="authOverlay" onclick="closeAuth()">
+    <div class="modal-card auth-card" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeAuth()"><i class="fas fa-times"></i></button>
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="loginTabBtn" onclick="switchAuth('login')">Login</button>
+        <button class="auth-tab" id="signupTabBtn" onclick="switchAuth('signup')">Sign Up</button>
+      </div>
+      <div id="loginForm" class="auth-form">
+        <h3>Welcome back!</h3>
+        <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="student@university.edu"/></div>
+        <div class="form-group"><label class="form-label">Password</label><input type="password" class="form-input" placeholder="••••••••"/></div>
+        <button class="btn-primary btn-full" onclick="fakeLogin()">Login</button>
+        <p class="auth-switch">Don't have an account? <a href="#" onclick="switchAuth('signup')">Sign up</a></p>
+      </div>
+      <div id="signupForm" class="auth-form hidden">
+        <h3>Create your account</h3>
+        <div class="form-group"><label class="form-label">Full Name</label><input type="text" class="form-input" placeholder="Your Name"/></div>
+        <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="student@university.edu"/></div>
+        <div class="form-group"><label class="form-label">Password</label><input type="password" class="form-input" placeholder="••••••••"/></div>
+        <button class="btn-primary btn-full" onclick="fakeLogin()">Create Account</button>
+        <p class="auth-switch">Already have an account? <a href="#" onclick="switchAuth('login')">Login</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
