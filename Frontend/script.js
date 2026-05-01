@@ -208,7 +208,7 @@ function initDragDrop() {
 // NAV SCROLL
 function initNavScroll() {
   const navbar = document.getElementById('navbar');
-  const sections = ['home', 'browse', 'report', 'how-it-works'];
+  const sections = ['home', 'browse', 'report', 'how-it-works', 'faq'];
   window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 40);
     let current = '';
@@ -244,10 +244,18 @@ function animateStats() {
 
 // SCROLL FADE
 function initScrollFade() {
-  const targets = document.querySelectorAll('.step-card, .testimonial-card, .section-header, .report-info');
+  const targets = document.querySelectorAll('.step-card, .testimonial-card, .faq-item, .section-header, .report-info');
   targets.forEach(el => el.classList.add('fade-in'));
   const io = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } }); }, { threshold: 0.12 });
   targets.forEach(t => io.observe(t));
+}
+
+// FAQ TOGGLE
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
 }
 
 // TOAST

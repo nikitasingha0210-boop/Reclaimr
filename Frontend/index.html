@@ -21,6 +21,7 @@
       <li><a href="#browse" class="nav-link">Browse Items</a></li>
       <li><a href="#report" class="nav-link">Report Item</a></li>
       <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+      <li><a href="#faq" class="nav-link">FAQ</a></li>
     </ul>
     <div class="nav-actions">
       <button class="btn-outline" id="loginBtn">Login</button>
@@ -37,6 +38,7 @@
       <li><a href="#browse" class="mobile-link">Browse Items</a></li>
       <li><a href="#report" class="mobile-link">Report Item</a></li>
       <li><a href="#how-it-works" class="mobile-link">How It Works</a></li>
+      <li><a href="#faq" class="mobile-link">FAQ</a></li>
     </ul>
     <div class="mobile-actions">
       <button class="btn-outline">Login</button>
@@ -229,6 +231,53 @@
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="faq-section" id="faq">
+    <div class="section-header">
+      <span class="section-label">FAQ</span>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <p class="section-sub">Everything you need to know about Reclaim'r.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>How do I report a lost item?</span><i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">Go to the "Report Item" section, select "I Lost Something", fill in the details and submit. You'll get notified if a match is found.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Is Reclaim'r only for students?</span><i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">Yes, Reclaim'r is designed exclusively for campus students and staff. You need a university email to sign up.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>How does the matching system work?</span><i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">When you submit a report, our system compares it against existing reports by category, location, and description keywords to find possible matches.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>What if nobody claims my found item?</span><i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">Your listing stays active for 30 days. After that, you can choose to hand it over to the campus admin office or extend the listing.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Is my contact information safe?</span><i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">Absolutely. Your email is only shared when you choose to contact someone. We never display it publicly on listings.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Can I delete my report after the item is found?</span><i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">Yes! Log into your account, go to "My Reports", and mark the item as claimed or delete the listing entirely.</div>
+      </div>
+    </div>
+  </section>
+
   <!-- TESTIMONIALS -->
   <section class="testimonials-section">
     <div class="section-header">
@@ -320,7 +369,7 @@
     </div>
   </div>
 
-  <!-- SUCCESS TOAST -->
+  <!-- TOAST -->
   <div class="toast" id="toast">
     <i class="fas fa-circle-check toast-icon"></i>
     <span id="toastMsg">Report submitted successfully!</span>
