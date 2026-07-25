@@ -26,6 +26,11 @@
     <div class="nav-actions">
       <button class="btn-outline" id="loginBtn">Login</button>
       <button class="btn-primary" id="signupBtn">Sign Up</button>
+      <div class="user-chip hidden" id="userChip">
+        <span class="user-chip-avatar"><i class="fas fa-user"></i></span>
+        <span class="user-chip-name" id="userChipName">Student</span>
+        <button class="user-chip-logout" onclick="logout()" title="Logout"><i class="fas fa-arrow-right-from-bracket"></i></button>
+      </div>
       <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
     </div>
   </nav>
@@ -40,9 +45,14 @@
       <li><a href="#how-it-works" class="mobile-link">How It Works</a></li>
       <li><a href="#faq" class="mobile-link">FAQ</a></li>
     </ul>
-    <div class="mobile-actions">
-      <button class="btn-outline">Login</button>
-      <button class="btn-primary">Sign Up</button>
+    <div class="mobile-actions" id="mobileAuthActions">
+      <button class="btn-outline" onclick="openAuth('login')">Login</button>
+      <button class="btn-primary" onclick="openAuth('signup')">Sign Up</button>
+    </div>
+    <div class="mobile-actions user-chip hidden" id="mobileUserChip">
+      <span class="user-chip-avatar"><i class="fas fa-user"></i></span>
+      <span class="user-chip-name" id="mobileUserChipName">Student</span>
+      <button class="user-chip-logout" onclick="logout()" title="Logout"><i class="fas fa-arrow-right-from-bracket"></i></button>
     </div>
   </div>
 
@@ -385,17 +395,17 @@
       </div>
       <div id="loginForm" class="auth-form">
         <h3>Welcome back!</h3>
-        <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="student@university.edu"/></div>
-        <div class="form-group"><label class="form-label">Password</label><input type="password" class="form-input" placeholder="••••••••"/></div>
-        <button class="btn-primary btn-full" onclick="fakeLogin()">Login</button>
+        <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="loginEmail" placeholder="student@university.edu"/></div>
+        <div class="form-group"><label class="form-label">Password</label><input type="password" class="form-input" id="loginPassword" placeholder="••••••••"/></div>
+        <button class="btn-primary btn-full" onclick="handleLogin()">Login</button>
         <p class="auth-switch">Don't have an account? <a href="#" onclick="switchAuth('signup')">Sign up</a></p>
       </div>
       <div id="signupForm" class="auth-form hidden">
         <h3>Create your account</h3>
-        <div class="form-group"><label class="form-label">Full Name</label><input type="text" class="form-input" placeholder="Your Name"/></div>
-        <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="student@university.edu"/></div>
-        <div class="form-group"><label class="form-label">Password</label><input type="password" class="form-input" placeholder="••••••••"/></div>
-        <button class="btn-primary btn-full" onclick="fakeLogin()">Create Account</button>
+        <div class="form-group"><label class="form-label">Full Name</label><input type="text" class="form-input" id="signupName" placeholder="Your Name"/></div>
+        <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="signupEmail" placeholder="student@university.edu"/></div>
+        <div class="form-group"><label class="form-label">Password</label><input type="password" class="form-input" id="signupPassword" placeholder="•••••••• (min. 6 characters)"/></div>
+        <button class="btn-primary btn-full" onclick="handleSignup()">Create Account</button>
         <p class="auth-switch">Already have an account? <a href="#" onclick="switchAuth('login')">Login</a></p>
       </div>
     </div>
